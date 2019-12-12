@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<robot name="body" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- <xacro:include filename="$(find ubiquitous_display_description)/urdf/body/body.gazebo.xacro"/> -->
+
+
+  <joint name="base_link_to_body_link" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="body_link"/>
+  </joint>
+
+  <link name="body_link">
+    <visual>
+      <geometry>
+        <!-- <box size="0.5 0.5 1.0"/> -->
+        <mesh filename="package://dual_ubiquitous_display_description/meshes/STL/body/dud_body.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0"/>
+      <material name="white" />
+    </visual>
+  </link>
+
+</robot>
