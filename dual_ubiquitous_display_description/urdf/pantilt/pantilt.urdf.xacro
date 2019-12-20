@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<robot name="pantilt" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- <xacro:include filename="$(find ubiquitous_display_description)/urdf/pantilt/pantilt.transmission.xacro"/>
+  <xacro:include filename="$(find ubiquitous_display_description)/urdf/pantilt/pantilt.gazebo.xacro"/> -->
+
+
+  <xacro:property name="base_to_box_height" value="0.066"/>
+  <xacro:property name="box_to_proj_height" value="0.17"/>
+
+  <material name="red" >
+    <color rgba="0.7 0.0 0.7 1.0" />
+  </material>
+  <material name="blue" >
+    <color rgba="0.0 0.7 0.7 1.0" />
+  </material>
+  <material name="green" >
+    <color rgba="0.0 0.7 0.7 1.0" />
+  </material>
+  <material name="gray" >
+    <color rgba="0.7 0.7 0.7 1.0" />
+  </material>
+
+  <xacro:macro name="pantilt_model" params="name parent">
+
+    <link name="${name}base_link" >
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <!--box size="0.07 0.085 0.065" /-->
+          <mesh filename="package://dual_ubiquitous_display_description/meshes/STL/pantilt/pantilt2_base_link.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+     <inertial>
+       <origin xyz="0 0 ${base_to_box_height/2}" rpy="0 0 0"/>
+       <mass value="0.78"/>
+       <inertia
+	    ixx="0.00190" ixy="0.0" ixz="0.0"
+	    iyy="0.00202" iyz="0.0"
+	    izz="0.00152"/>
+     </inertial>
+    </link>
+
+    <joint name="${parent}_to_${name}base_link" type="fixed">
+      <origin xyz="0 0 0.372 " rpy="0 0 0" />
+      <parent link="${parent}"/>
+      <child link="${name}base_link"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>
