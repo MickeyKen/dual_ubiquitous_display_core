@@ -98,6 +98,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        pantilt2_pan_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        pantilt2_tilt_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         wheel_link_bl:
           Alpha: 1
           Show Axes: false
@@ -145,6 +155,10 @@ Visualization Manager:
           Value: true
         pantilt2_base_link:
           Value: true
+        pantilt2_pan_link:
+          Value: true
+        pantilt2_tilt_link:
+          Value: true
         wheel_link_bl:
           Value: true
         wheel_link_br:
@@ -163,7 +177,9 @@ Visualization Manager:
           base_link:
             body_link:
               pantilt2_base_link:
-                {}
+                pantilt2_pan_link:
+                  pantilt2_tilt_link:
+                    {}
             caster_link_bl:
               wheel_link_bl:
                 {}
@@ -206,25 +222,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.509315013885498
+      Distance: 2.613826274871826
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.024645842611789703
+        Y: -0.19857457280158997
+        Z: 0.5897639393806458
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5503982901573181
+      Pitch: 0.4003981649875641
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.838576316833496
+      Yaw: 2.2335872650146484
     Saved: ~
 Window Geometry:
   Displays:
