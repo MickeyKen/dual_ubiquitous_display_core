@@ -2,8 +2,8 @@
 
 <robot name="pantilt" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- <xacro:include filename="$(find ubiquitous_display_description)/urdf/pantilt/pantilt.transmission.xacro"/>
-  <xacro:include filename="$(find ubiquitous_display_description)/urdf/pantilt/pantilt.gazebo.xacro"/> -->
+  <xacro:include filename="$(find dual_ubiquitous_display_description)/urdf/pantilt/pantilt.transmission.xacro"/>
+  <xacro:include filename="$(find dual_ubiquitous_display_description)/urdf/pantilt/pantilt.gazebo.xacro"/>
 
 
   <xacro:property name="base_to_box_height" value="0.066"/>
@@ -106,6 +106,17 @@
       <!--<safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />-->
       <dynamics damping="0.7"/>
     </joint>
+
+    <link name="${name}projector_plugin_optical_link" >
+    </link>
+
+    <joint name="${name}tilt_link_to_${name}projector_plugin_optical_link" type="fixed">
+      <origin xyz="0 -0.105 0.122 " rpy="0 -1.57 -1.57" />
+      <parent link="${name}tilt_link"/>
+      <child link="${name}projector_plugin_optical_link"/>
+    </joint>
+    <xacro:dual_ubiquitous_display_transmission name="${name}"/>
+    <xacro:pantilt_gazebo name="${name}"/>
   </xacro:macro>
 
 </robot>

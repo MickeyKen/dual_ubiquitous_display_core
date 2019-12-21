@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<robot name="pantilt_trans" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:macro name="dual_ubiquitous_display_transmission" params="name">
+
+  <transmission name="${name}trans1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${name}pan_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${name}motor1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="${name}tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${name}tilt_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${name}motor2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</xacro:macro>
+
+
+</robot>

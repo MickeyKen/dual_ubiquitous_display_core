@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot name="pantilt_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="pantilt_gazebo" params="name">
+
+  <gazebo reference="${name}base_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/LightGrey</material>
+  </gazebo>
+
+  <gazebo reference="${name}tilt_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/LightGrey</material>
+  </gazebo>
+  <gazebo reference="${name}pan_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/LightGrey</material>
+  </gazebo>
+
+  <gazebo reference="${name}projector_plugin_optical_link">
+    <projector name="ud_projector">
+      <!-- setting the pose will produce glitches even when attached to a revolute joint -->
+      <pose>0 0 0 0 0 0</pose>
+      <texture>welcome_gazebo.png</texture>
+      <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
+      <fov>0.7</fov>
+      <near_clip>0.1</near_clip>
+      <far_clip>5.0</far_clip>
+    </projector>
+  </gazebo>
+  <gazebo>
+     <plugin filename="libgazebo_ros_projector.so" name="projector">
+         <projector>${name}projector_plugin_optical_link/ud_projector</projector>
+         <alwaysOn>true</alwaysOn>
+         <updateRate>10.0</updateRate>
+         <!-- Apparently the 2 lines below does not affect anything -->
+         <textureName>welcome_gazebo.png</textureName>
+         <filterTextureName>welcome_gazebo.png</filterTextureName>
+         <!-- end -->
+         <textureTopicName>/dual_ubiquitous_display/texture</textureTopicName>
+         <projectorTopicName>/dual_ubiquitous_display/image</projectorTopicName>
+     </plugin>
+  </gazebo>
+</xacro:macro>
+
+</robot>
