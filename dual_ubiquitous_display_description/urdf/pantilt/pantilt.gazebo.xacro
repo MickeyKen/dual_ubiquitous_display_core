@@ -25,7 +25,7 @@
     <projector name="ud_projector">
       <!-- setting the pose will produce glitches even when attached to a revolute joint -->
       <pose>0 0 0 0 0 0</pose>
-      <texture>welcome_gazebo.png</texture>
+      <texture>${name}image.png</texture>
       <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
       <fov>0.7</fov>
       <near_clip>0.1</near_clip>
@@ -38,11 +38,11 @@
          <alwaysOn>true</alwaysOn>
          <updateRate>10.0</updateRate>
          <!-- Apparently the 2 lines below does not affect anything -->
-         <textureName>welcome_gazebo.png</textureName>
-         <filterTextureName>welcome_gazebo.png</filterTextureName>
+         <textureName>${name}image.png</textureName>
+         <filterTextureName>${name}image.png</filterTextureName>
          <!-- end -->
-         <textureTopicName>/dual_ubiquitous_display/texture</textureTopicName>
-         <projectorTopicName>/dual_ubiquitous_display/image</projectorTopicName>
+         <textureTopicName>/dual_ubiquitous_display/${name}texture</textureTopicName>
+         <projectorTopicName>/dual_ubiquitous_display/${name}image</projectorTopicName>
      </plugin>
   </gazebo>
 </xacro:macro>
