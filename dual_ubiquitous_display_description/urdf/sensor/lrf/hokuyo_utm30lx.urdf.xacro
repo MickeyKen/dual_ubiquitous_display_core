@@ -6,10 +6,10 @@
 
     <xacro:property name="M_PI" value="3.1415926535897931" />
 
-    <xacro:macro name="hokuyo_utm30lx_model" params="name parent">
+    <xacro:macro name="hokuyo_utm30lx_model" params="name parent pos ang">
       <joint name="${name}_joint" type="fixed">
         <!--xacro:insert_block name="origin" /-->
-        <origin xyz="-0.029 0 0.067" rpy="0 0 0"/>
+        <origin xyz="${pos} 0 0.178" rpy="0 0 ${ang}"/>
         <parent link="${parent}"/>
         <child link="${name}_frame"/>
       </joint>
