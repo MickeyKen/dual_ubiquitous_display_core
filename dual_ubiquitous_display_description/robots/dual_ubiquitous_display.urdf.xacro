@@ -8,8 +8,8 @@
   <xacro:include filename="$(find dual_ubiquitous_display_description)/urdf/sensor/lrf/hokuyo_utm30lx.urdf.xacro"/>
   <xacro:pantilt_model name="pantilt1_" parent="body_link" pos="0.18"/>
   <xacro:pantilt_model name="pantilt2_" parent="body_link" pos="-0.18"/>
-  <xacro:hokuyo_utm30lx_model name="front_laser" parent="base_link" pos="0.261" ang="0"/>
-  <xacro:hokuyo_utm30lx_model name="rear_laser" parent="base_link" pos="-0.261" ang="3.14"/>
+  <!--xacro:hokuyo_utm30lx_model name="front_laser" parent="base_link" pos="0.261" ang="0"/>
+  <xacro:hokuyo_utm30lx_model name="rear_laser" parent="base_link" pos="-0.261" ang="3.14"/-->
 
   <!-- =============== Gazebo =============== -->
   <gazebo>
