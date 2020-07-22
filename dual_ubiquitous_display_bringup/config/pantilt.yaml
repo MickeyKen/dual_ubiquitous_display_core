@@ -2,12 +2,12 @@
 # Control table item has to be set Camel_Case and not included whitespace
 # You are supposed to set at least Dynamixel ID
 # This example is compatible with Dynamixel using protocol 2.0
-pan_joint:
+pantilt1_pan_joint:
   ID: 1
   Return_Delay_Time: 0
   Profile_Acceleration: 10000
   Profile_Velocity: 100
-tilt_joint:
+pantilt1_tilt_joint:
   ID: 2
   Return_Delay_Time: 0
   Profile_Acceleration: 10000
