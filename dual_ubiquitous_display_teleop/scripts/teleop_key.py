@@ -21,8 +21,8 @@ MIN_PAN_POS = -3.14
 MAX_PAN_POS = 2.618
 MIN_PAN_POS = -2.618
 
-MAX_TILT_POS = 0.17
-MIN_TILT_POS = -0.34
+MAX_TILT_POS = 1.0
+MIN_TILT_POS = -0.6
 
 MAX_YAW_POS = 3.14
 MIN_YAW_POS = -3.14
@@ -120,7 +120,7 @@ if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
 
-    rospy.init_node('pir2_teleop')
+    rospy.init_node('dual_ubiquitous_display_teleop')
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
     head_pub = rospy.Publisher('/dynamixel_workbench_head/joint_trajectory', JointTrajectory, queue_size=100)
 
