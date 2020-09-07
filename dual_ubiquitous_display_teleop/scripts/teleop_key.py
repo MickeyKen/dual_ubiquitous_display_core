@@ -29,22 +29,23 @@ MIN_YAW_POS = -3.14
 
 LIN_VEL_STEP_SIZE = 0.01
 ANG_VEL_STEP_SIZE = 0.1
-POS_STEP_SIZE = 0.55
+POS_STEP_SIZE = 0.436332 # 25degree
 
 msg = """
 ---------------------------
 Moving around:
-        w            y   u   i
-   a    s    d       h   j   k
-        x                m
+        w               t               i
+   a    s    d     f    g    h     j    k    l
+        x               b               m
 
 w/x : increase/decrease linear velocity ( ~ 0.74)
 a/d : increase/decrease angular velocity ( ~ 2.84)
-y/i : increase/decrease yaw position (-3.14 ~ 3.14)
-u/m : increase/decrease tilt position (-0.34 ~ 0.17)
-h/k : increase/decrease pan position (-2.618 ~ 2.618)
+t/b : increase/decrease pan position (-0.34 ~ 0.17)
+f/h : increase/decrease tilt position (-2.618 ~ 2.618)
+i/m : increase/decrease pan position (-0.34 ~ 0.17)
+j/l : increase/decrease tilt position (-2.618 ~ 2.618)
 
-space key, s, j : force stop
+space key, s, g, k : force stop
 
 CTRL-C to quit
 """
@@ -67,8 +68,8 @@ def getKey():
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
 
-def vels(target_linear_vel, target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos):
-    return "currently:\tlinear vel %s\t angular vel %s\t pan pos %s\t tilt pos %s\t yaw pos %s\t " % (target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
+def vels(target_linear_vel, target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2):
+    return "currently:\tlinear vel %s\t angular vel %s\t pan pos %s\t tilt pos %s\t pan2 pos %s\t tilt2 pos %s\t" % (target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
 
 def makeSimpleProfile(output, input, slop):
     if input > output:
@@ -110,11 +111,6 @@ def checkTiltLimitPosition(pos):
 
     return pos
 
-def checkYawLimitPosition(pos):
-    pos = constrain(pos, MIN_YAW_POS, MAX_YAW_POS)
-
-    return pos
-
 
 if __name__=="__main__":
     if os.name != 'nt':
@@ -143,10 +139,25 @@ if __name__=="__main__":
     control_tilt_pos  = 0.0
     control_tilt_pos = 0.0
 
-    target_yaw_pos   = 0.0
-    target_yaw_pos  = 0.0
-    control_yaw_pos  = 0.0
-    control_yaw_pos = 0.0
+    target_yaw_pos_2   = 0.0
+    target_yaw_pos_2  = 0.0
+    control_yaw_pos_2  = 0.0
+    control_yaw_pos_2 = 0.0
+
+    target_pan_pos_2   = 0.0
+    target_pan_pos_2  = 0.0
+    control_pan_pos_2  = 0.0
+    control_pan_pos_2 = 0.0
+
+    target_tilt_pos_2   = 0.0
+    target_tilt_pos_2  = 0.0
+    control_tilt_pos_2  = 0.0
+    control_tilt_pos_2 = 0.0
+
+    target_yaw_pos_2  = 0.0
+    target_yaw_pos_2  = 0.0
+    control_yaw_pos_2  = 0.0
+    control_yaw_pos_2 = 0.0
 
     try:
         print msg
@@ -155,67 +166,80 @@ if __name__=="__main__":
             if key == 'w' :
                 target_linear_vel = checkLinearLimitVelocity(target_linear_vel + LIN_VEL_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
             elif key == 'x' :
                 target_linear_vel = checkLinearLimitVelocity(target_linear_vel - LIN_VEL_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
             elif key == 'a' :
                 target_angular_vel = checkAngularLimitVelocity(target_angular_vel + ANG_VEL_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
             elif key == 'd' :
                 target_angular_vel = checkAngularLimitVelocity(target_angular_vel - ANG_VEL_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == 'y' :
-                target_yaw_pos = checkYawLimitPosition(target_yaw_pos - POS_STEP_SIZE)
-                status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == 'i' :
-                target_yaw_pos = checkYawLimitPosition(target_yaw_pos + POS_STEP_SIZE)
-                status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == 'u' :
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+
+            elif key == 't' :
                 target_tilt_pos = checkTiltLimitPosition(target_tilt_pos - POS_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == 'm' :
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'b' :
                 target_tilt_pos = checkTiltLimitPosition(target_tilt_pos + POS_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == 'h' :
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'f' :
                 target_pan_pos = checkPanLimitPosition(target_pan_pos - POS_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == 'k' :
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'h' :
                 target_pan_pos = checkPanLimitPosition(target_pan_pos + POS_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
-            elif key == "t":
-                rospy.set_param("/head_trace_server/flag", "openvino_on")
-                flag = 1
-            elif key == "f":
-                rospy.set_param("/head_trace_server/flag", "none")
-                flag = 0
-            elif key == 'j':
-                target_linear_vel   = 0.0
-                control_linear_vel  = 0.0
-                target_angular_vel  = 0.0
-                control_angular_vel = 0.0
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+
+            elif key == 'i' :
+                target_tilt_pos_2 = checkTiltLimitPosition(target_tilt_pos_2 - POS_STEP_SIZE)
+                status = status + 1
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'm' :
+                target_tilt_pos_2 = checkTiltLimitPosition(target_tilt_pos_2 + POS_STEP_SIZE)
+                status = status + 1
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'j' :
+                target_pan_pos_2 = checkPanLimitPosition(target_pan_pos_2 - POS_STEP_SIZE)
+                status = status + 1
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'l' :
+                target_pan_pos_2 = checkPanLimitPosition(target_pan_pos_2 + POS_STEP_SIZE)
+                status = status + 1
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+
+            elif key == 'g':
+
                 target_pan_pos = 0.0
                 control_pan_pos = 0.0
                 target_tilt_pos = 0.0
                 control_tilt_pos = 0.0
                 target_yaw_pos = 0.0
                 control_yaw_pos = 0.0
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
+
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+            elif key == 'k':
+
+                target_pan_pos_2 = 0.0
+                control_pan_pos_2 = 0.0
+                target_tilt_pos_2 = 0.0
+                control_tilt_pos_2 = 0.0
+                target_yaw_pos_2 = 0.0
+                control_yaw_pos = 0.0
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
+
             elif key == ' ' or key == 's' :
                 target_linear_vel   = 0.0
                 control_linear_vel  = 0.0
                 target_angular_vel  = 0.0
                 control_angular_vel = 0.0
-                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_yaw_pos)
+                print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
             else:
                 if (key == '\x03'):
                     break
@@ -226,8 +250,9 @@ if __name__=="__main__":
 
             twist = Twist()
             jtp_msg = JointTrajectoryPoint()
+            jtp_msg_2 = JointTrajectoryPoint()
             head_msg = JointTrajectory()
-            head_msg.joint_names = [ "pantilt1_pan_joint", "pantilt1_tilt_joint"]
+            head_msg.joint_names = [ "pantilt1_pan_joint", "pantilt1_tilt_joint", "pantilt2_pan_joint", "pantilt2_tilt_joint"]
 
             control_linear_vel = makeSimpleProfile(control_linear_vel, target_linear_vel, (LIN_VEL_STEP_SIZE/2.0))
             twist.linear.x = control_linear_vel; twist.linear.y = 0.0; twist.linear.z = 0.0
@@ -238,18 +263,21 @@ if __name__=="__main__":
             control_pan_pos = makeSimpleProfile(control_pan_pos, target_pan_pos, (POS_STEP_SIZE/2.0))
             control_tilt_pos = makeSimpleProfile(control_tilt_pos, target_tilt_pos, (POS_STEP_SIZE/2.0))
 
+            control_pan_pos_2 = makeSimpleProfile(control_pan_pos_2, target_pan_pos_2, (POS_STEP_SIZE/2.0))
+            control_tilt_pos_2 = makeSimpleProfile(control_tilt_pos_2, target_tilt_pos_2, (POS_STEP_SIZE/2.0))
+
             head_msg.header.stamp = rospy.Time.now()
             # jtp_msg.points.positions = [control_pan_pos,control_tilt_pos,control_yaw_pos]
 
-            jtp_msg.positions = [control_pan_pos,control_tilt_pos]
-	    jtp_msg.velocities = [0.5,0.5]
+            jtp_msg.positions = [control_pan_pos,control_tilt_pos, control_pan_pos_2,control_tilt_pos_2]
+            jtp_msg.velocities = [0.5,0.5,0.5,0.5]
             jtp_msg.time_from_start = rospy.Duration.from_sec(0.00000002)
 
             head_msg.points.append(jtp_msg)
 
             pub.publish(twist)
-            if flag == 0:
-                head_pub.publish(head_msg)
+            head_pub.publish(head_msg)
+
 
 
 
