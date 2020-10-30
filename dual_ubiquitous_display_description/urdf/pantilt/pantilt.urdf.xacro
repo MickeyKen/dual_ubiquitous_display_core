@@ -22,7 +22,7 @@
     <color rgba="0.7 0.7 0.7 1.0" />
   </material>
 
-  <xacro:macro name="pantilt_model" params="name parent pos">
+  <xacro:macro name="pantilt_model" params="name parent pos offset">
 
     <link name="${name}base_link" >
       <visual>
@@ -71,7 +71,7 @@
     <joint name="${name}pan_joint" type="revolute">
       <parent link="${name}base_link"/>
       <child link="${name}pan_link"/>
-      <origin xyz="0 0 0.047" rpy="0 0 0" />
+      <origin xyz="0 0 0.047" rpy="0 0 ${-offset}" />
       <axis xyz="0 0 1" />
       <limit lower="-2.9670" upper="2.9670" effort="41" velocity="1"/>
       <!--<safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />-->
