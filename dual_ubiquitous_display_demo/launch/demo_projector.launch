@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="dual_ubiquitous_display_demo" type="demo_left_projector.py" name="demo_left_projector_imshow"  output="screen">
+  </node>
+  <node pkg="dual_ubiquitous_display_demo" type="demo_right_projector.py" name="demo_right_projector_imshow"  output="screen">
+  </node>
+</launch>
