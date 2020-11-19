@@ -12,6 +12,8 @@ if os.name == 'nt':
 else:
   import tty, termios
 
+import math
+
 MAX_LIN_VEL = 0.74
 MAX_ANG_VEL = 2.56
 
@@ -29,7 +31,8 @@ MIN_YAW_POS = -3.14
 
 LIN_VEL_STEP_SIZE = 0.01
 ANG_VEL_STEP_SIZE = 0.1
-POS_STEP_SIZE = 0.436332 # 25degree
+POS_STEP_SIZE = math.radians(1)
+PAN_OFFSET = math.radians(22.5)
 
 msg = """
 ---------------------------
@@ -129,35 +132,23 @@ if __name__=="__main__":
     control_linear_vel  = 0.0
     control_angular_vel = 0.0
 
-    target_pan_pos   = 0.0
-    target_pan_pos  = 0.0
-    control_pan_pos  = 0.0
-    control_pan_pos = 0.0
+    target_pan_pos   = 0.0 + PAN_OFFSET
+    control_pan_pos  = 0.0 + PAN_OFFSET
 
     target_tilt_pos   = 0.0
-    target_tilt_pos  = 0.0
     control_tilt_pos  = 0.0
-    control_tilt_pos = 0.0
 
     target_yaw_pos_2   = 0.0
-    target_yaw_pos_2  = 0.0
     control_yaw_pos_2  = 0.0
-    control_yaw_pos_2 = 0.0
 
-    target_pan_pos_2   = 0.0
-    target_pan_pos_2  = 0.0
-    control_pan_pos_2  = 0.0
-    control_pan_pos_2 = 0.0
+    target_pan_pos_2   = 0.0 + PAN_OFFSET
+    control_pan_pos_2  = 0.0 + PAN_OFFSET
 
     target_tilt_pos_2   = 0.0
-    target_tilt_pos_2  = 0.0
     control_tilt_pos_2  = 0.0
-    control_tilt_pos_2 = 0.0
 
     target_yaw_pos_2  = 0.0
-    target_yaw_pos_2  = 0.0
     control_yaw_pos_2  = 0.0
-    control_yaw_pos_2 = 0.0
 
     try:
         print msg
@@ -216,8 +207,8 @@ if __name__=="__main__":
 
             elif key == 'g':
 
-                target_pan_pos = 0.0
-                control_pan_pos = 0.0
+                target_pan_pos = 0.0 + PAN_OFFSET
+                control_pan_pos = 0.0 + PAN_OFFSET
                 target_tilt_pos = 0.0
                 control_tilt_pos = 0.0
                 target_yaw_pos = 0.0
@@ -226,8 +217,8 @@ if __name__=="__main__":
                 print vels(target_linear_vel,target_angular_vel, target_pan_pos, target_tilt_pos, target_pan_pos_2, target_tilt_pos_2)
             elif key == 'k':
 
-                target_pan_pos_2 = 0.0
-                control_pan_pos_2 = 0.0
+                target_pan_pos_2 = 0.0 + PAN_OFFSET
+                control_pan_pos_2 = 0.0 + PAN_OFFSET
                 target_tilt_pos_2 = 0.0
                 control_tilt_pos_2 = 0.0
                 target_yaw_pos_2 = 0.0
