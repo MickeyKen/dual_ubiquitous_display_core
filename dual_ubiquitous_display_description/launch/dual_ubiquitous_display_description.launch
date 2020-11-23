@@ -9,6 +9,7 @@
   <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ubiquitous_display_description)/rviz/show_ubiquitous_display.rviz" required="true"/> -->
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 
   <!-- <rosparam param="source_list">["pantilt_joint_states","ud_base_joint_states"]</rosparam> -->
 
