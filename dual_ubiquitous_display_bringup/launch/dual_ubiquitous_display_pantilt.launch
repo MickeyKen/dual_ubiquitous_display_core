@@ -27,7 +27,7 @@
 
   </node>
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
-  <rosparam param="source_list">["dynamixel_workbench_head/joint_states"]</rosparam>
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <rosparam param="source_list">["dynamixel_workbench_head/joint_states"]</rosparam> -->
 
 </launch>

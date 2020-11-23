@@ -11,7 +11,7 @@ pantilt1_tilt_joint:
   ID: 2
   Return_Delay_Time: 0
   Profile_Acceleration: 1000
-  Profile_Velocity: 40
+  Profile_Velocity: 20
 pantilt2_pan_joint:
   ID: 3
   Return_Delay_Time: 0
@@ -21,4 +21,4 @@ pantilt2_tilt_joint:
   ID: 4
   Return_Delay_Time: 0
   Profile_Acceleration: 1000
-  Profile_Velocity: 40
+  Profile_Velocity: 20

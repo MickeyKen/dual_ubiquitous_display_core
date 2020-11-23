@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find dual_ubiquitous_display_bringup)/launch/dual_ubiquitous_display_pantilt.launch"/>
+  <include file="$(find dual_ubiquitous_display_bringup)/launch/dual_ubiquitous_display_model.launch"/>
+
+
+</launch>
