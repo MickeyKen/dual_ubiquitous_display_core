@@ -7,18 +7,18 @@
   <gazebo reference="${name}base_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/LightGrey</material>
+    <material>Gazebo/Grey</material>
   </gazebo>
 
   <gazebo reference="${name}tilt_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/LightGrey</material>
+    <material>Gazebo/Grey</material>
   </gazebo>
   <gazebo reference="${name}pan_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/LightGrey</material>
+    <material>Gazebo/Grey</material>
   </gazebo>
 
   <gazebo reference="${name}projector_plugin_optical_link">
