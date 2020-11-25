@@ -1,0 +1,16 @@
+<launch>
+
+  <!-- <arg name="scan_topic" default="kinect_scan"/> -->
+  <node name="front_laser_driver" pkg="urg_node" type="urg_node">
+    <param name="serial_port" value="/dev/ttyACM0" />
+    <remap from="scan" to="front_laser_scan" />
+    <param name="frame_id" value="front_laser_frame" />
+  </node>
+
+  <node name="rear_laser_driver" pkg="urg_node" type="urg_node">
+    <param name="serial_port" value="/dev/ttyACM1" />
+    <remap from="scan" to="rear_laser_scan" />
+    <param name="frame_id" value="rear_laser_frame" />
+  </node>
+
+</launch>
