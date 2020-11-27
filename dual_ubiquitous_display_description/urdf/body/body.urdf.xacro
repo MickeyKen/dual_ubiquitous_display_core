@@ -21,6 +21,14 @@
     </visual>
   </link>
 
+  <link name="base_scan"/>
+
+  <joint name="base_link_to_base_scan" type="fixed">
+    <origin xyz="0 0 0.207" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="base_scan"/>
+  </joint>
+
   <xacro:plate_template_gazebo />
 
 </robot>
